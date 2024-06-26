@@ -11,7 +11,7 @@ import { Button } from '@radix-ui/themes';
 import axios from 'axios';
 
 if (process.env.NEXT_PUBLIC_SITE_URL === undefined) {
-  throw new Error('NEXT_SITE_URL is not defined');
+  throw new Error('NEXT_PUBLIC_SITE_URL is not defined');
 }
 
 const site = process.env.NEXT_PUBLIC_SITE_URL;
@@ -21,7 +21,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
   const elements = useElements();
 
   const [errorMessage, setErrorMessage] = useState<string>();
-  const [clientSecret, setClientSecret] = useState();
+  const [clientSecret, setClientSecret] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -52,6 +52,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
     setLoading(true);
 
     if (!stripe || !elements) {
+      setLoading(false);
       return;
     }
 
@@ -59,6 +60,12 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
 
     if (submitError) {
       setErrorMessage(submitError.message);
+      setLoading(false);
+      return;
+    }
+
+    if (!clientSecret) {
+      setErrorMessage('Client secret not available.');
       setLoading(false);
       return;
     }
