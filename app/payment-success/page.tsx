@@ -16,7 +16,7 @@ export default function PaymentSuccess({
         </Heading>
 
         <Box className='bg-white p-2 rounded-md text-purple-500 mt-5 text-4xl font-bold'>
-          ${amount}
+          {amount} sek
         </Box>
       </Box>
     </main>

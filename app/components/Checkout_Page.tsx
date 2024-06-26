@@ -8,6 +8,13 @@ import {
 } from '@stripe/react-stripe-js';
 import convertToSubcurrency from '../lib/convertToSubcurrency';
 import { Button } from '@radix-ui/themes';
+import axios from 'axios';
+
+if (process.env.NEXT_PUBLIC_SITE_URL === undefined) {
+  throw new Error('NEXT_SITE_URL is not defined');
+}
+
+const site = process.env.NEXT_PUBLIC_SITE_URL;
 
 const CheckoutPage = ({ amount }: { amount: number }) => {
   const stripe = useStripe();
@@ -18,15 +25,26 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch('/api/create-payment-intent', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ amount: convertToSubcurrency(amount) }),
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+    const createPaymentIntent = async () => {
+      try {
+        const response = await axios.post(
+          '/api/create-payment-intent',
+          {
+            amount: convertToSubcurrency(amount),
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+        setClientSecret(response.data.clientSecret);
+      } catch (error) {
+        console.error('Error creating payment intent:', error);
+      }
+    };
+
+    createPaymentIntent();
   }, [amount]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,7 +67,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `http://www.localhost:3000/payment-success?amount=${amount}`,
+        return_url: `${site}/payment-success?amount=${amount}`,
       },
     });
 
