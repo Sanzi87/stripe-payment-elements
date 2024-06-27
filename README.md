@@ -1,8 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Stripe Payment Elements Component
+
+This project demonstrates integration of Stripe Payment Elements within a Next.js 14 application for handling payments.
 
 ## Getting Started
 
-First, run the development server:
+Prerequisites
+Before running this project, ensure you have Node.js installed on your local development environment.
+
+1. Clone the repository: git clone https://github.com/Sanzi87/stripe-payment-elements.git
+2. Navigate into the project directory: cd stripe-payment-elements
+3. Install dependencies:
+
+npm install
+
+# or
+
+yarn install
+
+# or
+
+pnpm install
+
+4. Rename the envlocal.txt file to .env.local and provide your Stripe credentials:
+5. Running the Development Server
+
+To start the Next.js development server:
 
 ```bash
 npm run dev
@@ -16,21 +38,13 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The application integrates Stripe Payment Elements to handle secure payment processing.
+Click "Pay" to initiate the payment flow.
+The application will redirect to a success page (/payment-success) upon successful payment confirmation.
 
-## Learn More
+It can be used and modified freely in any project.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Deployment
+This project can be deployed to production using various deployment platforms compatible with Next.js applications.
