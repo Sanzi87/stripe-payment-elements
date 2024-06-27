@@ -11,15 +11,15 @@ Before running this project, ensure you have Node.js installed on your local dev
 2. Navigate into the project directory: cd stripe-payment-elements
 3. Install dependencies:
 
+```bash
 npm install
-
 # or
-
 yarn install
-
 # or
-
 pnpm install
+# or
+bun install
+```
 
 4. Rename the envlocal.txt file to .env.local and provide your Stripe credentials:
 5. Running the Development Server
