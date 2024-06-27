@@ -73,6 +73,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
     const { error } = await stripe.confirmPayment({
       elements,
       clientSecret,
+      redirect: 'if_required',
       confirmParams: {
         return_url: `${site}/payment-success?amount=${amount}`,
       },
